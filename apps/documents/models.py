@@ -1,5 +1,8 @@
 from django.db import models
-
+from .validators import (
+    validate_file_type,
+    validate_file_size
+)
 
 class Document(models.Model):
 
@@ -8,7 +11,13 @@ class Document(models.Model):
     )
 
     file = models.FileField(
-        upload_to='documents/'
+
+    upload_to='documents/',
+
+    validators=[
+        validate_file_type,
+        validate_file_size
+    ]
     )
 
     file_type = models.CharField(
